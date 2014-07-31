@@ -50,6 +50,8 @@ yes '' | /app/vendor/php/bin/pecl install memcache
 cd /app/vendor/php
 tar cvfz /tmp/php-$PHP_VERSION-with-fpm-heroku.tar.gz .
 
+# check Dropbox-Uploader is connected
+bash /app/support/drop/dropbox_uploader.sh info
 # upload to dropbox using Dropbox-Uploader
 cd /tmp/
 bash /app/support/drop/dropbox_uploader.sh -s upload php-$PHP_VERSION-with-fpm-heroku.tar.gz /php/php-$PHP_VERSION-with-fpm-heroku.tar.gz

@@ -34,6 +34,8 @@ make install
 cd /app/vendor/nginx
 tar cvfz /tmp/nginx-$NGINX_VERSION-heroku.tar.gz .
 
+# check Dropbox-Uploader is connected
+bash /app/support/drop/dropbox_uploader.sh info
 # upload to dropbox using Dropbox-Uploader
 cd /tmp/
 bash /app/support/drop/dropbox_uploader.sh -s upload nginx-$NGINX_VERSION-heroku.tar.gz /nginx/nginx-$NGINX_VERSION-heroku.tar.gz
