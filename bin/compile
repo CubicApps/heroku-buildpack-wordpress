@@ -64,15 +64,25 @@ if [ -n "$NGINX_VERSION" ] || [ -n "$PHP_VERSION" ] || [ -n "$WORDPRESS_VERSION"
 fi
 
 # Make sure that all dropbox variables have been set.
-if [ -z "$USE_DROPBOX" ] || [ "$USE_DROPBOX" != "true" ] || [ "$USE_DROPBOX" != "false" ] || [ -z "$DROP_NGINX_URL" ] || [ -z "$DROP_PHP_URL" ]; then
-  echo "Aborting. Environment variables controlling buildpack must have dropbox variables set"
+if [ -z "$USE_DROPBOX" ] || [ -n "$USE_DROPBOX" ] || [ -z "$DROP_NGINX_URL" ] || [ -z "$DROP_PHP_URL" ]; then
+  echo "Aborting. Environment variables controlling buildpack must have dropbox variables set."
   echo ""
   echo "Change these heroku configs and push again:"
   echo ""
 
-  if [ -z "$USE_DROPBOX" ] || [ "$USE_DROPBOX" != "true" ] || [ "$USE_DROPBOX" != "false" ]; then
+  if [ -z "$USE_DROPBOX" ]; then
     echo "    You must set USE_DROPBOX=true or USE_DROPBOX=false"
 	echo "    heroku config:set   USE_DROPBOX=true"
+  fi
+
+  if [ -n "$USE_DROPBOX" ]; then
+    if [ "$USE_DROPBOX" != "true" ]; then
+      if [ "$USE_DROPBOX" != "false" ]; then
+        echo "    You must set USE_DROPBOX to either true or false!"
+		echo "    Current value for USE_DROPBOX is: $USE_DROPBOX"
+	    echo "    heroku config:set   USE_DROPBOX=true"
+      fi
+	fi
   fi
 
   if [ -z "$DROP_NGINX_URL" ]; then
