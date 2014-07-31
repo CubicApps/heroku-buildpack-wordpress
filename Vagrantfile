@@ -1,6 +1,9 @@
 ## Define variables
 VAGRANTFILE_API_VERSION = 2
+# Custom Local Vagrant Box Name
 VM_BOX_NAME = "basic-base"
+# Ubuntu Server 14.04 LTS (Trusty Tahr) 64-bit.
+VM_BOX_URL = "http://cloud-images.ubuntu.com/vagrant/trusty/current/trusty-server-cloudimg-amd64-vagrant-disk1.box"
 
 # Specify the minimum Vagrant version
 Vagrant.require_version ">= 1.4.2"
@@ -20,6 +23,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 	config.vm.define "buildpack", primary: true do |buildpack|
 		# Define the base box to use.
 		buildpack.vm.box = VM_BOX_NAME
+
+		# If this Vagrant box does not exist then download a clean box
+		buildpack.vm.box_url = VM_BOX_URL
 
 		# Share an additional folder to the guest VM.
 		#buildpack.vm.synced_folder "./data", "/vagrant_data"
