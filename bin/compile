@@ -87,14 +87,14 @@ if [ -z "$USE_DROPBOX" ] || [ -n "$USE_DROPBOX" ] || [ -z "$DROP_NGINX_URL" ] ||
 
   if [ -z "$DROP_NGINX_URL" ]; then
     if [ "$USE_DROPBOX" = "true" ]; then
-      echo "    You must set the Dropbox URL to your NGINX binary file!"
-	  echo "    heroku config:set   DROP_NGINX_URL=https://www.dropbox.com/s/<token_value>/nginx-1.7.3-heroku.tar.gz"
+      echo "    You must set DROP_NGINX_URL to your NGINX binary file!"
+	  echo "    heroku config:set   DROP_NGINX_URL=https://www.dropbox.com/s/123456/nginx-1.7.3-heroku.tar.gz"
     fi
   fi
 
   if [ -z "$DROP_PHP_URL" ]; then
     if [ "$USE_DROPBOX" = "true" ]; then
-      echo "    You must set the Dropbox URL to your PHP binary file!"
+      echo "    You must set DROP_PHP_URL to your PHP binary file!"
 	  echo "    heroku config:set   DROP_PHP_URL=https://www.dropbox.com/s/123456/php-5.5.15-with-fpm-heroku.tar.gz"
 	fi
   fi
