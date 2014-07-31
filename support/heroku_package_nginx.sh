@@ -25,11 +25,11 @@ tar zvxf pcre.tgz
 # build and package nginx for heroku
 cd /tmp/nginx-$NGINX_VERSION
 ./configure --prefix=/app/vendor/nginx \
-		   --with-pcre=contrib/pcre-$PCRE_VERSION \
-		   --with-http_ssl_module \
-		   --with-http_gzip_static_module \
-		   --with-http_stub_status_module \
-		   --with-http_realip_module
+  --with-pcre=contrib/pcre-$PCRE_VERSION \
+  --with-http_ssl_module \
+  --with-http_gzip_static_module \
+  --with-http_stub_status_module \
+  --with-http_realip_module
 make install
 cd /app/vendor/nginx
 tar cvfz /tmp/nginx-$NGINX_VERSION-heroku.tar.gz .

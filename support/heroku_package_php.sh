@@ -16,34 +16,34 @@ tar xvjf php.tar.bz2
 # build and package php for heroku
 cd php-$PHP_VERSION
 ./configure --prefix=/app/vendor/php \
-			--with-mysql \
-			--with-pdo-mysql \
-			--with-iconv \
-			--with-gd \
-			--with-curl=/usr/lib \
-			--with-config-file-path=/app/vendor/php \
-			--with-openssl \
-			--enable-fpm \
-			--with-zlib \
-			--enable-mbstring \
-			--disable-debug \
-			--disable-rpath \
-			--enable-gd-native-ttf \
-			--enable-inline-optimization \
-			--with-bz2 \
-			--enable-pcntl \
-			--enable-mbregex \
-			--with-mhash \
-			--enable-zip \
-			--with-pcre-regex \
-			--enable-libxml \
-			--with-gettext \
-			--with-jpeg-dir \
-			--with-mysqli \
-			--with-pcre-regex \
-			--with-png-dir \
-			--without-pdo-sqlite \
-			--without-sqlite3
+  --with-mysql \
+  --with-pdo-mysql \
+  --with-iconv \
+  --with-gd \
+  --with-curl=/usr/lib \
+  --with-config-file-path=/app/vendor/php \
+  --with-openssl \
+  --enable-fpm \
+  --with-zlib \
+  --enable-mbstring \
+  --disable-debug \
+  --disable-rpath \
+  --enable-gd-native-ttf \
+  --enable-inline-optimization \
+  --with-bz2 \
+  --enable-pcntl \
+  --enable-mbregex \
+  --with-mhash \
+  --enable-zip \
+  --with-pcre-regex \
+  --enable-libxml \
+  --with-gettext \
+  --with-jpeg-dir \
+  --with-mysqli \
+  --with-pcre-regex \
+  --with-png-dir \
+  --without-pdo-sqlite \
+  --without-sqlite3
 make install
 /app/vendor/php/bin/pear config-set php_dir /app/vendor/php
 yes '' | /app/vendor/php/bin/pecl install memcache
