@@ -114,21 +114,6 @@ if [ -z "$BUILDPACK_S3_BUCKET" ]; then
   fi
 fi
 
-if [ ${USE_DROPBOX} = "true" ]; then
-  if [ -z "$BUILDPACK_NGINX_DROPBOX_TOKEN" ]; then
-    echo "Please enter the Dropbox token value to your NGINX binary file:"
-	echo "E.g., https://www.dropbox.com/s/<token_value>/nginx-1.7.3-heroku.tar.gz"
-	read BUILDPACK_NGINX_DROPBOX_TOKEN
-  fi
-
-  if [ -z "$BUILDPACK_PHP_DROPBOX_TOKEN" ]; then
-    echo "Please enter the Dropbox token value to your PHP binary file:"
-	echo "E.g., https://www.dropbox.com/s/<token_value>/php-5.5.15-with-fpm-heroku.tar.gz"
-    read BUILDPACK_PHP_DROPBOX_TOKEN
-  fi
-fi
-
-
 # END CONFIG
 
 # Define URLs
