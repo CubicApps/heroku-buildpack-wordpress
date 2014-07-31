@@ -77,7 +77,7 @@ if [ -n "$NGINX_VERSION" ] || [ -n "$PHP_VERSION" ] || [ -n "$WORDPRESS_VERSION"
   exit 250
 fi
 
-# Support end-user configured BUILDPACK_NGINX_VERSION, BUILDPACK_PHP_VERSION, BUILDPACK_WORDPRESS_VERSION,
+# Support end-user configured USE_DROPBOX, BUILDPACK_NGINX_VERSION, BUILDPACK_PHP_VERSION, BUILDPACK_WORDPRESS_VERSION,
 # BUILDPACK_S3_BUCKET, BUILDPACK_WORDPRESS_DIR, BUILDPACK_NGINX_DROPBOX_TOKEN, BUILDPACK_PHP_DROPBOX_TOKEN 
 # environment variables. This way, end-users can choose exactly which versions to run with. Requires 
 # user-env-compile for now, but will continue to work when Heroku deprecates user-env-compile and ENV_DIR
