@@ -13,7 +13,7 @@ fi
 
 # download and extract nginx
 rm -rf /app/vendor/nginx
-curl http://nginx.org/download/nginx-$NGINX_VERSION.tar.gz -o nginx.tgz
+curl http://nginx.org/download/nginx-$NGINX_VERSION.tar.gz -o /tmp/nginx.tgz
 cd /tmp
 tar xzvf nginx.tgz
 
