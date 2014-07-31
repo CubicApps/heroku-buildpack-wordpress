@@ -20,7 +20,7 @@ export_env_dir $3
 
 # Prevent publishing if old environment variables set. This feature will be removed in the future
 # and thus the "global names" used before will be for application use.
-if [ -n "$NGINX_VERSION" ] || [ -n "$PHP_VERSION" ] || [ -n "$WORDPRESS_VERSION" ] || [ -n "$S3_BUCKET" ] || [ -n "$WORDPRESS_DIR" ] || [ -z "$USE_DROPBOX" ] || [ -z "$BUILDPACK_NGINX_DROPBOX_TOKEN" ] || [ -z "$BUILDPACK_PHP_DROPBOX_TOKEN" ]; then
+if [ -n "$NGINX_VERSION" ] || [ -n "$PHP_VERSION" ] || [ -n "$WORDPRESS_VERSION" ] || [ -n "$S3_BUCKET" ] || [ -n "$WORDPRESS_DIR" ]; then
   echo "Aborting. Env variables controlling buildpack should be prefixed with \"BUILDPACK_\"."
   echo ""
   echo "Change the heroku config and then push again:"
@@ -60,39 +60,42 @@ if [ -n "$NGINX_VERSION" ] || [ -n "$PHP_VERSION" ] || [ -n "$WORDPRESS_VERSION"
       echo "    heroku config:unset WORDPRESS_DIR"
   fi
 
-  if [ -z "$USE_DROPBOX" ]; then
-    echo "    You must set USE_DROPBOX"
+  exit 250
+fi
+
+# Make sure that all dropbox variables have been set.
+if [ -z "$USE_DROPBOX" ] || [ "$USE_DROPBOX" != "true" ] || [ "$USE_DROPBOX" != "false" ] || [ -z "$DROP_NGINX_URL" ] || [ -z "$DROP_PHP_URL" ]; then
+  echo "Aborting. Environment variables controlling buildpack must have dropbox variables set"
+  echo ""
+  echo "Change these heroku configs and push again:"
+  echo ""
+
+  if [ -z "$USE_DROPBOX" ] || [ "$USE_DROPBOX" != "true" ] || [ "$USE_DROPBOX" != "false" ]; then
+    echo "    You must set USE_DROPBOX=true or USE_DROPBOX=false"
 	echo "    heroku config:set   USE_DROPBOX=true"
   fi
-  
-  if [ -z "$BUILDPACK_NGINX_DROPBOX_TOKEN" ]; then
-    if [ -z "$USE_DROPBOX" ]; then
-      echo "    You must set the Dropbox token value to your NGINX binary file!"
-	  echo "    E.g., https://www.dropbox.com/s/<token_value>/nginx-1.7.3-heroku.tar.gz"
-	  echo "    heroku config:set   BUILDPACK_NGINX_DROPBOX_TOKEN=123456"
+
+  if [ -z "$DROP_NGINX_URL" ]; then
+    if [ "$USE_DROPBOX" = "true" ]; then
+      echo "    You must set the Dropbox URL to your NGINX binary file!"
+	  echo "    heroku config:set   DROP_NGINX_URL=https://www.dropbox.com/s/<token_value>/nginx-1.7.3-heroku.tar.gz"
     fi
   fi
 
-  if [ -z "$BUILDPACK_PHP_DROPBOX_TOKEN" ]; then
-    if [ -z "$USE_DROPBOX" ]; then
-      echo "    You must set the Dropbox token value to your PHP binary file!"
-	  echo "    E.g., https://www.dropbox.com/s/<token_value>/php-5.5.15-with-fpm-heroku.tar.gz"
-	  echo "    heroku config:set   BUILDPACK_PHP_DROPBOX_TOKEN=123456"
+  if [ -z "$DROP_PHP_URL" ]; then
+    if [ "$USE_DROPBOX" = "true" ]; then
+      echo "    You must set the Dropbox URL to your PHP binary file!"
+	  echo "    heroku config:set   DROP_PHP_URL=https://www.dropbox.com/s/123456/php-5.5.15-with-fpm-heroku.tar.gz"
 	fi
   fi
 
   exit 250
 fi
 
-# Support end-user configured USE_DROPBOX, BUILDPACK_NGINX_VERSION, BUILDPACK_PHP_VERSION, BUILDPACK_WORDPRESS_VERSION,
-# BUILDPACK_S3_BUCKET, BUILDPACK_WORDPRESS_DIR, BUILDPACK_NGINX_DROPBOX_TOKEN, BUILDPACK_PHP_DROPBOX_TOKEN 
-# environment variables. This way, end-users can choose exactly which versions to run with. Requires 
-# user-env-compile for now, but will continue to work when Heroku deprecates user-env-compile and ENV_DIR
-# appears to this script as a parameter.
-
-if [ -z "$USE_DROPBOX" ]; then
-  USE_DROPBOX="true"
-fi
+# Support end-user configured BUILDPACK_NGINX_VERSION, BUILDPACK_PHP_VERSION, BUILDPACK_WORDPRESS_VERSION,
+# BUILDPACK_S3_BUCKET, BUILDPACK_WORDPRESS_DIR, environment variables. This way, end-users can choose exactly which  
+# versions to run with. Requires user-env-compile for now, but will continue to work when Heroku deprecates
+# user-env-compile and ENV_DIR appears to this script as a parameter.
 
 if [ -z "$BUILDPACK_NGINX_VERSION" ]; then
   BUILDPACK_NGINX_VERSION=1.7.3
@@ -118,8 +121,8 @@ fi
 
 # Define URLs
 if [ ${USE_DROPBOX} = "true" ]; then
-  NGINX_URL="https://www.dropbox.com/s/${BUILDPACK_NGINX_DROPBOX_TOKEN}/nginx-${BUILDPACK_NGINX_VERSION}-heroku.tar.gz"
-  PHP_URL="https://www.dropbox.com/s/${BUILDPACK_PHP_DROPBOX_TOKEN}/php-${BUILDPACK_PHP_VERSION}-with-fpm-heroku.tar.gz"
+  NGINX_URL=${DROP_NGINX_URL}
+  PHP_URL=${DROP_PHP_URL}
 else
   NGINX_URL="https://s3.amazonaws.com/${BUILDPACK_S3_BUCKET}/nginx-${BUILDPACK_NGINX_VERSION}-heroku.tar.gz"
   PHP_URL="https://s3.amazonaws.com/${BUILDPACK_S3_BUCKET}/php-${BUILDPACK_PHP_VERSION}-with-fpm-heroku.tar.gz"
