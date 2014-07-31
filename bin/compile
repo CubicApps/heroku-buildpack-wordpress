@@ -20,7 +20,7 @@ export_env_dir $3
 
 # Prevent publishing if old environment variables set. This feature will be removed in the future
 # and thus the "global names" used before will be for application use.
-if [ -n "$NGINX_VERSION" ] || [ -n "$PHP_VERSION" ] || [ -n "$WORDPRESS_VERSION" ] || [ -n "$S3_BUCKET" ] || [ -n "$WORDPRESS_DIR" ] || [ -n "$USE_DROPBOX" ] || [ -n "$BUILDPACK_NGINX_DROPBOX_TOKEN" ] || [ -n "$BUILDPACK_PHP_DROPBOX_TOKEN" ]; then
+if [ -n "$NGINX_VERSION" ] || [ -n "$PHP_VERSION" ] || [ -n "$WORDPRESS_VERSION" ] || [ -n "$S3_BUCKET" ] || [ -n "$WORDPRESS_DIR" ] || [ -z "$USE_DROPBOX" ] || [ -z "$BUILDPACK_NGINX_DROPBOX_TOKEN" ] || [ -z "$BUILDPACK_PHP_DROPBOX_TOKEN" ]; then
   echo "Aborting. Env variables controlling buildpack should be prefixed with \"BUILDPACK_\"."
   echo ""
   echo "Change the heroku config and then push again:"
@@ -60,12 +60,12 @@ if [ -n "$NGINX_VERSION" ] || [ -n "$PHP_VERSION" ] || [ -n "$WORDPRESS_VERSION"
       echo "    heroku config:unset WORDPRESS_DIR"
   fi
 
-  if [ -n "$USE_DROPBOX" ]; then
+  if [ -z "$USE_DROPBOX" ]; then
     echo "    You must set USE_DROPBOX"
 	echo "    heroku config:set   USE_DROPBOX=true"
   fi
   
-  if [ -n "$BUILDPACK_NGINX_DROPBOX_TOKEN" ]; then
+  if [ -z "$BUILDPACK_NGINX_DROPBOX_TOKEN" ]; then
     if [ -z "$USE_DROPBOX" ]; then
       echo "    You must set the Dropbox token value to your NGINX binary file!"
 	  echo "    E.g., https://www.dropbox.com/s/<token_value>/nginx-1.7.3-heroku.tar.gz"
@@ -73,7 +73,7 @@ if [ -n "$NGINX_VERSION" ] || [ -n "$PHP_VERSION" ] || [ -n "$WORDPRESS_VERSION"
     fi
   fi
 
-  if [ -n "$BUILDPACK_PHP_DROPBOX_TOKEN" ]; then
+  if [ -z "$BUILDPACK_PHP_DROPBOX_TOKEN" ]; then
     if [ -z "$USE_DROPBOX" ]; then
       echo "    You must set the Dropbox token value to your PHP binary file!"
 	  echo "    E.g., https://www.dropbox.com/s/<token_value>/php-5.5.15-with-fpm-heroku.tar.gz"
