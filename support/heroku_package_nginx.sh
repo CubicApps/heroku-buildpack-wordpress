@@ -36,4 +36,4 @@ tar cvfz /tmp/nginx-$NGINX_VERSION-heroku.tar.gz .
 
 # upload to dropbox using Dropbox-Uploader
 cd /tmp/
-bash /app/support/drop/dropbox_uploader.sh upload nginx-1.7.3-heroku.tar.gz /nginx/nginx-1.7.3-heroku.tar.gz
+bash /app/support/drop/dropbox_uploader.sh -s upload nginx-1.7.3-heroku.tar.gz /nginx/nginx-1.7.3-heroku.tar.gz

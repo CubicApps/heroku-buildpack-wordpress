@@ -52,4 +52,4 @@ tar cvfz /tmp/php-$PHP_VERSION-with-fpm-heroku.tar.gz .
 
 # upload to dropbox using Dropbox-Uploader
 cd /tmp/
-bash /app/support/drop/dropbox_uploader.sh upload php-5.5.15-with-fpm-heroku.tar.gz /php/php-5.5.15-with-fpm-heroku.tar.gz
+bash /app/support/drop/dropbox_uploader.sh -s upload php-5.5.15-with-fpm-heroku.tar.gz /php/php-5.5.15-with-fpm-heroku.tar.gz
