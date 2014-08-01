@@ -1,2 +1,3 @@
 ## OS or Editor folders
+*.py[cod]
 .vagrant
