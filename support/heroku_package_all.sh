@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # execute the NGINX build process
-bash heroku_package_nginx.sh
+bash support/heroku_package_nginx.sh
 
 # execute the PHP build process
-bash heroku_package_php.sh
+bash support/heroku_package_php.sh
