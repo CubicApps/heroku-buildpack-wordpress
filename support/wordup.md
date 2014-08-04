@@ -21,7 +21,7 @@ Receiving objects: 100% (166/166), 1.04 MiB | 25 KiB/s, done.
 Resolving deltas: 100% (37/37), done.
 -----> Acquiring Heroku dynos
        Creating new-wordpress-site... done, stack is cedar
-       BUILDPACK_URL=https://github.com/mchung/heroku-buildpack-wordpress.git
+       BUILDPACK_URL=https://github.com/CubicApps/heroku-buildpack-wordpress.git
        http://new-wordpress-site.herokuapp.com/ | git@heroku.com:new-wordpress-site.git
        Git remote heroku added
 -----> Create custom production branch
