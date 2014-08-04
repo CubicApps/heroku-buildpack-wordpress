@@ -1,18 +1,8 @@
-master
-  * heroku-sendgrid now pulls name/email from wpdb instead of heroku config
-    EMAIL_REPLY_TO, EMAIL_FROM, and EMAIL_NAME are deprecated
-  * End-users can now choose versions for vendored apps. Refer to VERSIONS.md.
+[TOC]
 
-v0.7
+# v1.0.0 [TBC]
 
-2013-02-08  Marc Chung  <mchung@gmail.com>
-
-  * Changed the WordPress on Heroku project template.  Older blogs deploying
-    against this buildpack will no longer work.  Refer to UPGRADING.md.
-  * Added /app/bin to PATH
-
-v0.6
-
-2013-02-07  Marc Chung  <mchung@gmail.com>
-
-  * Establish v0.6 from master
+* [NEW] Use [logentries](https://addons.heroku.com/logentries) for log management.
+* [NEW] Added a Vagrantfile for creating [Vagrant](http://www.vagrantup.com/) virtual machines.
+* [NEW] Integrated [Dropbox-Uploader](https://github.com/andreafabrizi/Dropbox-Uploader) to allow compiled binaries to be uploaded to Dropbox.
+* [CHANGE] Vendor packages can be downloaded from S3 or Dropbox. This is controlled by the `USE_DROPBOX` environment variable.

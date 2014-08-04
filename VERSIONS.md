@@ -1,6 +1,11 @@
-This is a list of vendored Nginx and PHP packages made available by this buildpack.  They are hosted on S3 and maintained by @mchung.
+[TOC]
 
-Nginx
+# Available Vendored Nginx and PHP Packages
+
+This is a list of vendored Nginx and PHP packages made available by this buildpack.  They are hosted on S3 and maintained by [@mchung](https://github.com/mchung).
+
+## Nginx
+*Hosted on S3 and maintained by [@mchung](https://github.com/mchung)*
 * 1.5.0 (development)
 * 1.4.2 (stable)
 * 1.4.1 (stable)
@@ -8,12 +13,14 @@ Nginx
 * 1.3.11 (development)
 * 1.2.7 (stable)
 
-PHP
+## PHP
+*Hosted on S3 and maintained by [@mchung](https://github.com/mchung)*
 * 5.5.2 (5.5-stable)
 * 5.4.11 (5.4-stable)
 * 5.3.9 (5.3-stable)
 
-WordPress *downloaded directly* from [WordPress](http://wordpress.org/download/release-archive/)
+## WordPress
+*Downloaded directly from [WordPress.org](http://wordpress.org/download/release-archive/)*
 * 3.9.1
 * 3.9
 * 3.8.2
@@ -23,29 +30,3 @@ WordPress *downloaded directly* from [WordPress](http://wordpress.org/download/r
 * 3.6
 * 3.5.1
 * 3.5.0
-
-Configure WordPress on Heroku to use specific versions of Nginx and PHP
-```bash
-$ git clone git://github.com/your_name/wordpress-on-heroku.git mydogblog
-$ cd mydogblog
-$ heroku create -s cedar
-$ heroku labs:enable user-env-compile
-$ heroku config:set NGINX_VERSION=1.5.0
-$ heroku config:set PHP_VERSION=5.4.11
-$ heroku config:set WORDPRESS_VERSION=3.5.1
-$ heroku config:set BUILDPACK_URL=https://github.com/mchung/heroku-buildpack-wordpress.git
-$ git push heroku master
-```
-
-Configure existing WordPress on Heroku to use a specific version of WordPress
-```bash
-$ cd existing_wp
-$ heroku labs:enable user-env-compile
-$ heroku config:set WORDPRESS_VERSION=3.6.2
-$ git push heroku master
-```
-
-To request a new vendored package, [please file an issue](https://github.com/mchung/heroku-buildpack-wordpress/issues/new?title=Request%20for%20new%20vendor%20package&body=Hi-%0A%0APlease add:%0A%0A```%0Anginx-2.3.18%0Aphp-4.5%0A```%0A%0AThank%20you)
-Note that WordPress does not need to be vendored, you can set the WORDPRESS_VERSION to install any version of WordPress.
-
-
