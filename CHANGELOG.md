@@ -1,6 +1,6 @@
 [TOC]
 
-# v1.0.0 [TBC]
+# v1.0.0 [04-AUG-2014]
 
 * [NEW] Use [logentries](https://addons.heroku.com/logentries) for log management.
 * [NEW] Added a Vagrantfile for creating [Vagrant](http://www.vagrantup.com/) virtual machines.
