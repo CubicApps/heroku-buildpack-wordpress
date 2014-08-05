@@ -15,6 +15,7 @@ This project is based on the [heroku-buildpack-wordpress project by Marc Chung](
 * `Sendgrid` - Sendgrid for the email backend.
 * `MemCachier` - MemCachier for the memcached backend.
 * `Logentries` - Logentries for log management.
+* `New Relic` - New Relic for real-time production monitoring.
 
 ## Overview
 
